@@ -44,7 +44,8 @@ kubectl apply -f installation/emojivoto-injected.yaml
 
 Notes:
 
-Blog post: https://buoyant.io/2021/12/14/locking-down-network-traffic-between-kubernetes-namespaces/
+Blog
+post: https://buoyant.io/2021/12/14/locking-down-network-traffic-between-kubernetes-namespaces/
 
 * Authorization policy in 2.11
     * control over communication allowed in cluster
@@ -58,6 +59,7 @@ Blog post: https://buoyant.io/2021/12/14/locking-down-network-traffic-between-ku
     * built on top of mTLS (same as Linkerd in general)
     * enforced at pod level (important for zero trust)
     * will be able to capture L7 semantics in 2.12+
+    * NetworkPolicy is still better for things like UDP traffic
 * AuthorizationPolicy is the first possibility using Linkerd to "shoot yourself
   in the foot"
 * Mechanics:
@@ -95,6 +97,16 @@ Blog post: https://buoyant.io/2021/12/14/locking-down-network-traffic-between-ku
         - if building a deny by default setup, need to make sure kubeletes are
           authorized or they won't start
     2. Default policies are not read dynamically
-        - can change with `linkerd update` cli tool command 
+        - can change with `linkerd update` cli tool command
     3. Ports must be in the pod spec
         - if a server references a port, it must be in the pod spec
+
+new commands:
+
+```
+ curl -sL run.linkerd.io/emojivoto-policy.yml > installation/emojivoto-policy.yaml
+ kubectl apply -f installation/emojivoto-policy.yaml
+```
+
+At this point he was showing some of the same stuff that was being shown in the
+blog post above
