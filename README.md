@@ -44,6 +44,8 @@ kubectl apply -f installation/emojivoto-injected.yaml
 
 Notes:
 
+Blog post: https://buoyant.io/2021/12/14/locking-down-network-traffic-between-kubernetes-namespaces/
+
 * Authorization policy in 2.11
     * control over communication allowed in cluster
     * Linkerd (and Kubernetes) allows all communication between pods. Now it has
@@ -96,4 +98,3 @@ Notes:
         - can change with `linkerd update` cli tool command 
     3. Ports must be in the pod spec
         - if a server references a port, it must be in the pod spec
-
